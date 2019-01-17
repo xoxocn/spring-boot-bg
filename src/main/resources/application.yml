@@ -1,0 +1,75 @@
+############################################################
+#
+# port 配置
+#
+############################################################
+server:
+  port: 8080
+############################################################
+#
+# mybatis 配置
+#
+############################################################
+mybatis:
+#  config-location: classpath:mybatis/mybatis-config.xml    # mybatis配置文件所在路径
+  type-aliases-package: com.xoxo.demotity.*       # 定义所有操作类的别名所在包
+  mapper-locations:                                     # 所有的mapper映射文件
+  - classpath:mybatis/mapper/*/*.xml
+############################################################
+#
+# 配置数据源相关	使用阿里巴巴的 druid 数据源
+#
+############################################################
+spring:
+  datasource:
+      name: mybatis_test
+      type: com.alibaba.druid.pool.DruidDataSource
+      druid:
+        filters: stat,wall
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/springcloud_sell?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false
+        username: root
+        password: 123456
+        initial-size: 1
+        min-idle: 1
+        max-active: 20
+        max-wait: 60000
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 300000
+        validation-query: SELECT 'x'
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        pool-prepared-statements: false
+        max-pool-prepared-statement-per-connection-size: 20
+# 合并多个DruidDataSource的监控数据
+#spring.datasource.useGlobalDataSourceStat=true
+###############以上为配置druid添加的配置########################################
+ ############################################################
+  #
+  # redis配置
+  #
+  ############################################################
+  redis:
+        #数据库索引
+      cluster:
+          nodes: 192.168.6.32:7000,192.168.6.32:7001,192.168.6.32:7002
+      lettuce:
+        pool:
+          #最大连接数
+          max-active: 8
+          #最大阻塞等待时间(负数表示没限制)
+          max-wait: -1
+          #最大空闲
+          max-idle: 8
+          #最小空闲
+          min-idle: 0
+        #连接超时时间
+      timeout: 10000
+############################################################
+#
+# logback 配置
+#
+############################################################
+logging:
+  config: classpath:logback.xml
