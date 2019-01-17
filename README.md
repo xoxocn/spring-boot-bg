@@ -1,2 +1,2 @@
-# spring-boot-bg
-git@github.comxoxocnspring-boot-bg.git
+# spring-boot-bgms
+backgroud management system
